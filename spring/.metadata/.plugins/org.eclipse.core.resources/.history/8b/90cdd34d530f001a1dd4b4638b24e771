@@ -1,0 +1,40 @@
+package com.ssafy.fms.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.ssafy.fms.vo.Add;
+import com.ssafy.fms.vo.Intake;
+
+@Repository
+public class AddDaoImpl implements AddDao {
+	
+	@Autowired
+	SqlSession session;
+
+	@Override
+	public List<Add> selectAll(String id) {
+		return session.selectList("fms.add.selectAll", id);
+	}
+
+
+	@Override
+	public void insert(Add i) {
+		session.insert("fms.add.insert", i);
+	}
+
+	@Override
+	public void update(Add i) {
+		session.update("fms.add.update", i);
+	}
+
+
+	@Override
+	public void delete(Add i) {
+		session.update("fms.add.delete", i);
+	}
+
+}

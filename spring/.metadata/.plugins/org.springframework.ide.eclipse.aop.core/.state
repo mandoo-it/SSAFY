@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aop-reference-model>
+<aop-project name="SpringDI"/>
+<aop-project name="PhoneWeb"/>
+<aop-project name="BootRestProject"/>
+<aop-project name="BeforeSpring"/>
+<aop-project name="vueboot"/>
+<aop-project name="BootProject1"/>
+<aop-project name="PhoneSwagger"/>
+<aop-project name="SpringMVC"/>
+<aop-project name="safefood_spring"/>
+<aop-project name="SpringMybatis"/>
+<aop-project name="BootRestPhoneProject"/>
+<aop-project name="BootRestBoardProject"/>
+<aop-project name="SpringVueboot"/>
+<aop-project name="SpringMVCTest"/>
+<aop-project name="login"/>
+<aop-project name="SpringRest"/>
+</aop-reference-model>

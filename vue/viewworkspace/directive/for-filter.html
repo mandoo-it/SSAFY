@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>my super heroes</h1>
+        <ul>
+            <li v-for = "hero in heroes">
+                {{hero | result}}
+            </li>
+        </ul>  
+        <hr>
+    </div>
+    <script>
+        var vm = new Vue({
+            el : ".container",
+            data : {
+                heroes:[
+				{firstname:'Bruce', lastname:'Wayne', role:'Batman'},
+				{firstname:'Clark', lastname:'Kent', role:'Superman'},
+				{firstname:'Jay', lastname:'Gerrick', role:'Flash'},
+				{firstname:'Peter', lastname:'Parker', role:'Spiderman'}
+			]	
+            } ,
+            filters:{
+                result: function(hero){
+                    return hero.firstname + " " + hero.lastname + " is " + hero.role;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

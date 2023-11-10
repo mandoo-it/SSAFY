@@ -1,0 +1,13 @@
+package com.ssafy.fms.vo;
+
+import org.apache.ibatis.type.Alias;
+
+@Alias("Excersize")
+public class Exercize {
+	private int code;
+	private int cal;
+	private String name;
+
+
+	
+}

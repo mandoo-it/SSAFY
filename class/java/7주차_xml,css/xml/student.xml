@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<students xmlns:gold="http://www.gold.com"
+		  xmlns:silver="http://www.silver.com"><!-- root tag 주석이당 -->
+	<gold:student class="A1">
+		<num>123</num>
+		<num>tommy</num>
+		<num>100</num>
+	</gold:student>
+	<gold:student class="A2">
+		<num>124</num>
+		<num>rabbit</num>
+		<num>200</num>
+	</gold:student>
+	<silver:student class="A3">
+		<num>125</num>
+		<num>herray</num>
+		<num>300</num>
+	</silver:student>
+</students>

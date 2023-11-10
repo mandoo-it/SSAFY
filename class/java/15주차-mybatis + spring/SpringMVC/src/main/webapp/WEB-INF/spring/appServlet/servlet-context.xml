@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Springmybatis에서는 xmlns가 bean이라고 되어있어서 bean이 기본이라 그냥 import해도 되는데 mvc가 기본 네임스페이스를 가져와버려서 bean쓸때 접두어 붙여야 -->
+<beans:beans xmlns="http://www.springframework.org/schema/mvc" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	<!-- spring bean 환경파일 : 생성해야 할 객체에 대해 적어놔야 한다. -->
+	<!-- 웹을 안 쓰는 환경(view)안 쓸 때는 접두어(beans :) 를 안 써도 되는데  웹을 쓰는 환경에서는 접두어를 꼭 붇여야-->
+	<beans:import resource="mybatis-db.xml"></beans:import>
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	
+	<!-- InternalResourceViewResolver는 view를 결정해 준다. controller가 'home' return 하면 접두어 접미어 붙여서 보내버린다.  -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+	<context:component-scan base-package="com.mvc.controller" />
+	
+
+	
+</beans:beans>

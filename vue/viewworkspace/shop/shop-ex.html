@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>SSAFY</title>
+
+<style type="text/css">
+/* css import */
+@import url('./shop.css');
+</style>
+<script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+	<div class="nav-bar"></div>
+	<div id="app">
+		<div class="product">
+			<div class="product-image">
+				<!-- image -->
+				<img v-bind:src = "image"/>
+			</div>
+
+			<div class="product-info">
+				<h1>{{product}}</h1>     
+				
+				<!-- inStock값에 따라 메세지 다르게 뿌려주기; 재고있음 or 품절 -->
+				<p v-if="inStock" v-bind:class="{blue : inStock}">재고 있음</p>
+				<p v-if="!inStock" v-bind:class="{red : !inStock}">재고 없음</p>
+				<!-- On Sale값에 따라 메세지 뿌려주기; On Sale!  -->
+				<span  v-if="onSale">On Sale!</span>
+				<p>봄에 어울리는 멋진 데님 블라우스</p>
+
+				<ul>
+					<!-- 제품 상세 정보 출력하기 -->
+					<li v-for = "detail in details">
+						{{detail}}
+					</li>
+				</ul>
+
+						
+				 <div v-for="option in options" :key="options.optionId" class="color-box" @mouseover="updateProduct(option.optionImage)"
+				 :style = "[{backgroundColor : option.optionColor},{display : 'inline-block'},{margin:'5px'}]"><!--mouseover: image change -->
+					
+				</div>
+				<br>
+				<!-- size 표시하기 -->	
+				<select>
+					<option v-for = "s in size" :value="s">
+						{{s}}
+					</option>
+				</select> 
+							
+				<br>
+				<!-- addToCart 호출 -->
+				<button @click="addToCart">Add </button>				
+				<!-- removeFromCart 호출 -->
+				<button @click="removeFromCart">Remove </button>
+
+
+				<div class="cart">
+					<p>Cart({{cart}})</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script>
+	
+	var app = new Vue({
+	  el : '#app',
+	  data: {
+	    product: 'Blouse',
+	    image: '../img/blueBlouse.jpg',
+		inStock: true,
+		quantity: 10,
+		onSale: true,
+	
+	    
+	    details: ['80% cotton', '20% polyester', 'Gender-neutral'],
+	    options: [
+	      {
+	        optionId: 2234,
+	        optionColor: 'violet',
+	        optionImage: '../img/violetBlouse.jpg'
+	      },
+	      {
+	        optionId: 2235,
+	        optionColor: 'blue',
+	        optionImage: '../img/blueBlouse.jpg'
+	      }
+	    ],
+	    
+		cart: 0 ,
+		size : ['85','90','95','100','105','110']
+	  },  methods: {
+			addToCart: function(){
+				if(this.cart < 10) {
+					this.cart++;
+					this.quantity--;
+				}
+				else 
+					alert('재고부족')
+			},
+			removeFromCart: function(){
+				if(this.cart > 0) {
+					this.cart--;
+					this.quantity++;
+				}
+					
+				else 
+				alert('이미 장바구니가 비었습니다.')
+			},
+			updateProduct(optionImage){
+				this.image = optionImage;
+			}
+		},
+		watch : {
+			quantity : function(val){
+				if(val <= 0) {
+					this.inStock = false;
+					this.onSale = false;
+				}
+				
+				else {
+					this.inStock = true;
+					this.onSale = true
+				}
+					
+			}
+		}
+	})
+
+
+	</script>
+	
+
+</body>
+</html>

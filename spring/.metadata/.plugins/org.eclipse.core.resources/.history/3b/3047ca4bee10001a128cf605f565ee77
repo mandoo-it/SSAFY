@@ -1,0 +1,17 @@
+package com.ssafy.fms.service;
+
+import java.util.List;
+
+import com.ssafy.fms.vo.Intake;
+
+public interface IntakeService {
+
+	public List<Intake> selectAll(String id);
+	
+	public void insert(Intake i);
+	
+	public void update(Intake i);
+	
+	public List<Intake> selectToday(String id);
+	
+}

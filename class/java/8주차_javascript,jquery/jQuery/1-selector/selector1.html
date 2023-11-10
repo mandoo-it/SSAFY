@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+//jquery를 이용해서 사용자가 작성하는 스크립트부분
+//document(html)문서가 준비가 된 후 jquery를 실행하겠다는 의미
+$(document).ready(function() {
+	$('h1').css('color', 'red');
+	$('h2').css('color', 'blue');
+	$('#pink').css('font-size', "30pt").css('color', 'pink'); //id가 핑크인애를 찾아서  //method chaining
+	$('.orange').css({'color' : 'orange', 'font-size':'20pt', 'font-family':'tahoma'}); //json형식으로 여러개 한번에 지정
+	$('h3').each(function(index, item) {
+		if(index % 2 == 0)
+			$(item).css('color', 'cyan');
+		else 
+			$(item).css('color', 'yellow');
+		$(item).css('font-size', '30pt');
+		$(thiss).css('font-family', '궁서체');
+	});
+
+});
+</script>
+
+</head>
+<body>
+	<h1>this is h1 tag</h1>
+	<h1>this is h1 tag</h1>
+	<h1>this is h1 tag</h1>
+	<h2>this is h2 tag</h2>
+	<h2>this is h2 tag</h2>
+	<h2>this is h2 tag</h2>
+	<p class="orange">this is p tag</p>
+	<p id="pink">this is another p tag</p>
+</body>
+</html>

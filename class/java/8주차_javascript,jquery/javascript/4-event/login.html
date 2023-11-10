@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script type="text/javascript">
+			function check(){
+				// 1. id, pw 입력하는 칸 알아내기
+				var id = document.getElementById("id");
+				var pass = document.getElementById("pass");
+				
+				// 2. 입력칸 안에 들어있는 값 알아내기
+				var idvalue = id.value;
+				var passvalue = pass.value;
+				
+				// 3. 값이 비었는지 체크 -> 메세지 띄우기
+				if(idvalue == ""){
+					alert('ID를 입력해 주세요');
+					return;
+				}
+				else if(passvalue == ""){
+					alert('PW를 입력해 주세요');
+					return;
+				}
+					
+				// 4. 조건을 만족하면 화면 전송하기
+				else{
+					var f = document.getElementById('f'); // form 알아내기
+					f.action = 'welcome.jsp';
+					f.submit(); // form 전송
+				}				
+			}
+		</script>
+		
+	</head>
+	
+	<body>
+		<h1>Login</h1>
+		<form method="post" id="f"> <!-- post 사용하면 id, pw 입력한 값이 주소창에x -->
+			ID: <input type = "text" name = "id" id="id"><br> <!-- DOM 사용하려면 ID 필요 -->
+			PW: <input type = "password" name = "pass" id="pass"><p>
+			<input type = "button" value = "로그인" onclick="check()">
+			<input type = "reset" value = "취소">
+		</form>
+	</body>
+</html>

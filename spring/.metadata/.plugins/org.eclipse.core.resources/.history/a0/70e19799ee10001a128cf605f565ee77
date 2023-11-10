@@ -1,0 +1,36 @@
+package com.ssafy.fms.vo;
+
+import org.apache.ibatis.type.Alias;
+
+@Alias("Excersize")
+public class Exercize {
+	private int code;
+	private int cal;
+	private String name;
+	public int getCode() {
+		return code;
+	}
+	public void setCode(int code) {
+		this.code = code;
+	}
+	public int getCal() {
+		return cal;
+	}
+	public void setCal(int cal) {
+		this.cal = cal;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Exercize(int code, int cal, String name) {
+		this.code = code;
+		this.cal = cal;
+		this.name = name;
+	}
+
+
+	
+}

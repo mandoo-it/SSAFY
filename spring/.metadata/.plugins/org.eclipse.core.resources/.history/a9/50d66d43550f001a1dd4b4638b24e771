@@ -1,0 +1,62 @@
+package com.ssafy.fms.vo;
+
+import org.apache.ibatis.type.Alias;
+
+@Alias("Answer")
+public class Answer {
+	private int num;
+	private int pnum;
+	private String name;
+	private String content;
+	private String wdate;
+	
+	public Answer(int num, int pnum, String name, String content, String wdate) {
+		super();
+		this.num = num;
+		this.pnum = pnum;
+		this.name = name;
+		this.content = content;
+		this.wdate = wdate;
+	}
+
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+
+	public int getPnum() {
+		return pnum;
+	}
+
+	public void setPnum(int pnum) {
+		this.pnum = pnum;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getWdate() {
+		return wdate;
+	}
+
+	public void setWdate(String wdate) {
+		this.wdate = wdate;
+	}
+	
+}

@@ -1,0 +1,56 @@
+c:\ssafy 폴더생성
+
+
+예전 노트북 or PC에 2015 Redistributable Update 3이 미설치된 경우만
+Microsoft Visual C++ 2015 Redistributable Update 3 설치함
+64bit일때 vc_redist.x64.exe
+32bit일때 vc_redist.x86.exe
+
+
+깃설치
+Git-2.24.0.2-64-bit.exe 디폴트
+git config --global user.name "ssafy"
+git config --global user.email "ssafy@email.com"
+git config --list
+git config --global --unset user.name
+git config --global --unset user.email
+
+
+데이터베이스설치
+mysql-installer-community-8.0.12.0.msi 설치
+Mysql서버,워크벤치,Connect/J,예제소스 선택
+root계정의 비번은 root(개인이 알아서 설정)
+ssafy계정/ssafy패스/ssafydb디비 생성
+
+
+자바설치
+zulu8.33.0.1-jdk8.0.192-win_x64.msi 디폴트 설치
+JAVA_HOME 설정
+PATH 등록
+
+
+이클립스설치
+ssafy폴더 밑에
+eclipse.zip 압축풀기
+work_java 워크스페이스로 사용
+UTF-8 세팅(encod로 조회 설정)
+
+
+톰켓설치
+ssafy폴더 밑에
+apache-tomcat-8.5.45.zip 압축풀기
+이클립스와 스프링에 등록 사용
+
+
+스프링(Boot)설치
+ssafy폴더 밑에
+sts-bundle.zip 압축풀기
+springspace.zip 압축풀고 워크스페이스로 사용
+UTF-8 세팅(encod로 조회 설정)
+
+
+VS코드설치
+VSCodeUserSetup-x64-1.40.0.exe 디폴트로 설치시 화면관련 4개 선택
+node-v12.13.0-x64.msi 노드JS 설치
+vueworkspace.zip 압축풀고 워크스페이스로 사용
+

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+    <div class="app">
+        {{message}}<br>
+        {{hello}}<br>
+        {{hello}}<br>
+        {{hello}}<br>
+        <button v-on:click="reverse">reverse</button> <!--계속 reverse 반복하는-->
+        
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '.app',
+            data:{
+                message: 'hello, world'
+            },
+            //computed 옵션이 의존하고 있는 데이터가 수정되기 전까지 값을 캐싱해 둠
+            //같은 데이터 값을 사용하는 경우 다시 실행되지 않고, 캐시해 둔 값을 가져다 재사용함
+            computed:{      //관심을 두고있는 message 데이터가 변동이 없으면 실행하지 않음 
+                hello(){    //hello: function(){}
+                    console.log('computed...')
+                    this.message = this.message
+                    .split("")
+                    .reverse()
+                    .join(""); //문자열로 합쳐주는 과정
+                    return this.message
+                }
+            },
+            methods: {
+                reverse(){  //computed와 같은내용 
+                    console.log('method...');
+                    this.message = this.message
+                    .split("")
+                    .reverse()
+                    .join("");
+                    return this.message
+                }
+            }
+        });
+    </script>
+</body>
+</html>

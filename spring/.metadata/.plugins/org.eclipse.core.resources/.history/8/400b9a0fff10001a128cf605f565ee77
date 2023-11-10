@@ -1,0 +1,20 @@
+package com.ssafy.fms.dao;
+
+import java.util.List;
+
+import com.ssafy.fms.vo.Exercise;
+import com.ssafy.fms.vo.Intake;
+
+public interface IntakeDao {
+
+	public List<Intake> selectAll(String id);
+
+	public void insert(Intake i);
+
+	public void update(Intake i);
+	
+	public List<Intake> selectToday(String id);
+	
+	public Exercise[] exercise();
+
+}

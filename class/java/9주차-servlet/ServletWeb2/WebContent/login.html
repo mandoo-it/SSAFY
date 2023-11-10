@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login Page</title>
+<script type="text/javascript">
+   function idcheck(){
+       //1. 사용자가 입력한 id를 알아와서 중복 체크후 메세지 표시
+       var id=document.getElementById("id");
+       if(id.value.length == 0){
+    	   alert('pass를 입력해 주세요');
+    	   return;
+       }
+       var f = document.getElementById('f');
+       f.action = 'main.do?action=login';
+       f.submit();
+   }
+</script>
+</head>
+<body>
+<form method="post" id="f" name="f">
+<p>로그인 해주세요.
+아이디 : <input type="text" name="id" id="id" value="홍길동"><br>
+암호 : <input type="password" name="pass" id = "pass" value="jong"><br>
+<input type="button" value="login" onclick="idcheck()">
+</form>
+</body>
+</html>
+

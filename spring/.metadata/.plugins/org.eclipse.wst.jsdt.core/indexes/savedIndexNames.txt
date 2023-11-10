@@ -1,0 +1,9 @@
+INDEX VERSION 1.4+C:\ssafy\springspace\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+4012330205.index
+4140732548.index
+947706949.index
+808263108.index
+145002494.index
+3158905373.index
+779488207.index
+1453299945.index

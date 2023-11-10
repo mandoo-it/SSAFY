@@ -1,0 +1,114 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>SafeFood | 송다은 윤규희</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<link
+	href="https://fonts.googleapis.com/css?family=Poor+Story&display=swap"
+	rel="stylesheet">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
+
+
+<style>
+/* Remove the navbar's default margin-bottom and rounded borders */
+.navbar {
+	margin-bottom: 0;
+	border-radius: 0;
+}
+
+/* Add a gray background color and some padding to the footer */
+footer {
+	background-color: white;
+	padding: 25px;
+}
+
+select {
+	height: 32px;
+	width: 250px;
+}
+
+h2, h5, label, option {
+	font-family: 'Poor Story', cursive;
+}
+
+.img-height {
+	height: 300px;
+	width: 300px;
+}
+
+.jumbotron {
+	height: 350px;
+	background-image: url("img/food1.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	color: white;
+}
+
+.scale {
+	transform: scale(1);
+	-webkit-transform: scale(1);
+	-moz-transform: scale(1);
+	-ms-transform: scale(1);
+	-o-transform: scale(1);
+	transition: all 1s ease-in-out; /*자연스러운 확대 축소 위해서*/
+}
+
+.scale:hover {
+	transform: scale(1.2); /*이미지 hover 했을경우 transform: scale() 값을 키워 확대*/
+	-webkit-transform: scale(1.2);
+	-moz-transform: scale(1.2);
+	-ms-transform: scale(1.2);
+	-o-transform: scale(1.2);
+}
+
+#iname{
+	padding-left: 20px;
+}
+</style>
+</head>
+
+<body>
+<jsp:include page="nav.jsp"></jsp:include>
+	
+<div class="container">
+	<h2>${today}의 식단표</h2>
+	<br>
+	<table id="tdata" class="table" border="1">
+		<tr bgcolor="#d8d8d8"><td align="center" >식품명</td><td align="center">섭취 갯수</td></tr>
+		<c:forEach var = "i" items="${list}">
+		<tr><td id = "iname">${i.name}</td><td align="center">${i.count }</td></tr>
+		</c:forEach>
+		<tr bgcolor="#d8d8d8"><td align="center" >오늘 섭취한 칼로리 : </td><td align="center">${total} 칼로리</td></tr>
+		<tr bgcolor="#d8d8d8"><td align="center" >적정 칼로리 : </td><td align="center">${total} 칼로리</td></tr>
+	</table>
+	<%-- <h2>오늘 섭취한 칼로리 : ${total} 칼로리</h2>
+	<h2>적정 칼로리 : ${proper} 칼로리</h2> --%>
+	<c:if test = "${total >= proper}">
+		<div class="form-group ">
+			<button type="button" class="btn btn-primary btn-lg btn-group btn-block btn-default btn-animated" onclick="location.href = 'msg/${total - proper}' ">추천 운동 문자 보내기</button>
+		</div>
+	</c:if>
+</div>
+
+<jsp:include page="footer.jsp"></jsp:include>
+
+</body>
+
+</html>

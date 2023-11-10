@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <h2>Calculator</h2>
+        <form class="form-line">
+            <input v-model.number="num1">
+            <select v-model="op">
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="*">*</option>
+                <option value="/">/</option>
+            </select>
+            <input v-model.number="num2">
+            <input v-bind:value="calc">
+            <h2>result : {{num1}} {{op}} {{num2}} = {{calc}}</h2>
+        </form>
+    </div> 
+    <script>
+        var vm = new Vue({
+            el : '#app',
+            data : {
+                num1 : 1,
+                num2 : 2,
+                op : '+'
+            },
+            computed : {
+                calc : function() {
+                    //num1, num2, op가지고 결과를 만들기
+                    switch(this.op) {
+                        case '+' :  
+                            return this.num1 + this.num2;
+                        case '-' :
+                            return this.num1 - this.num2;
+                        case '*' :
+                            return this.num1 * this.num2;
+                        case '/' :
+                        return this.num1 / this.num2;
+                    }
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>

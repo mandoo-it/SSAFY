@@ -1,0 +1,46 @@
+package com.ssafy.fms.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.ssafy.fms.vo.Exercise;
+import com.ssafy.fms.vo.Intake;
+
+@Repository
+public class IntakeDaoImpl implements IntakeDao {
+	
+	@Autowired
+	SqlSession session;
+
+	@Override
+	public List<Intake> selectAll(String id) {
+		return session.selectList("fms.intake.selectAll", id);
+	}
+
+
+	@Override
+	public void insert(Intake i) {
+		session.insert("fms.intake.insert", i);
+	}
+
+	@Override
+	public void update(Intake i) {
+		session.update("fms.intake.update", i);
+	}
+
+
+	@Override
+	public List<Intake> selectToday(String id) {
+		return session.selectList("fms.intake.selectToday", id);
+	}
+
+
+	@Override
+	public List<Exercise> exercise() {
+		return session.selectList("fms.intake.ex");
+	}
+
+}

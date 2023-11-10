@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- BasicDataSource : connection pool 객체 
+클라이언트 프로그램에서 
+-->
+<bean id="ds" class="org.apache.commons.dbcp.BasicDataSource"> <!-- 뒤에다 dataSource면 다 pool이당 -->
+	<property name="driverClassName">
+		<value>com.mysql.cj.jdbc.Driver</value>
+	</property>
+	
+	<property name="url">
+		<value>jdbc:mysql://localhost:3306/scott?serverTimezone=UTC</value>
+	</property>
+	
+	<property name="username">
+		<value>scott</value>
+	</property>
+	
+	<property name="password">
+		<value>tiger</value>
+	</property>
+</bean>
+
+</beans>

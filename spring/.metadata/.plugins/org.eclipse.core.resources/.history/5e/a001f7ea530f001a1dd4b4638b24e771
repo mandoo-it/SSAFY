@@ -1,0 +1,17 @@
+package com.ssafy.fms.dao;
+
+import java.util.List;
+
+import com.ssafy.fms.vo.Add;
+
+public interface AddDao {
+
+	public List<Add> selectAll(int qnum);
+
+	public void insert(Add i);
+
+	public void update(Add i);
+	
+	public void delete(Add i);
+
+}

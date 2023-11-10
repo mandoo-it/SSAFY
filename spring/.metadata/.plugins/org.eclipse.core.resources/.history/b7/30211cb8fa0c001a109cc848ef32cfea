@@ -1,0 +1,20 @@
+package com.ssafy.fms.dao;
+
+import java.util.List;
+
+import org.springframework.transaction.annotation.Transactional;
+
+import com.ssafy.fms.vo.Board;
+import com.ssafy.fms.vo.QnA;
+
+
+
+public interface QnADao {
+	public List<QnA> selectAll();
+	public QnA selectOne(String num);
+	public void insert(QnA c);
+	public void delete(String num);
+	public void update(QnA b);
+	public List<QnA> search();
+
+}

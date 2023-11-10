@@ -1,0 +1,68 @@
+package com.ssafy.fms.dao;
+
+import java.util.HashMap;
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.ssafy.fms.vo.Board;
+import com.ssafy.fms.vo.QnA;
+
+
+@Component("qdao")
+public class QnADaoImpl implements QnADao{
+   
+	@Autowired
+	SqlSession session;
+	
+	@Override
+	public List<QnA> selectAll() {
+		return session.selectList("qna.selectAll");
+	}
+
+	@Override
+	public QnA selectOne(String num) {
+		countUp(num);
+		return session.selectOne("qna.selectOne", num);
+	}
+
+	public void countUp(String num) {
+		session.update("qna.countUp", num);
+	}
+
+	@Override
+	public void insert(QnA b) {
+		session.insert("qna.insert", b);
+	}
+
+	@Override
+	public void delete(String num) {
+		session.delete("qna.delete", num);
+	}
+
+	@Override
+	public void update(QnA b) {
+		session.update("qna.update", b);
+		
+	}
+
+	@Override
+	public List<QnA> search(String condition, String word) {
+		System.out.println(word);
+		if(word != null) {
+			 if(condition.equals("name")) {
+					return session.selectList("qna.selectName", word);
+				} else if(condition.equals("title")) {
+					return session.selectList("qna.selectTitle", word);
+				} else 
+					return session.selectList("qna.selectAll");
+		} else return session.selectList("qna.selectAll");
+			
+		
+	}
+
+}
+
+

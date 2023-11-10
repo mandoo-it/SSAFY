@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://unpkg.com/vue"></script>
+</head>
+<body>
+    <div id="first">
+        <firstcomponent></firstcomponent>
+    </div>
+    <script type="text/x-template" id="atemplate">
+        <div><h1>최상위 태그는 반드시 하나여야 합니다.</h1></div>
+    </script>
+    <script type="text/javascript">
+        Vue.component('firstcomponent',{
+            template : '#atemplate'
+        });
+
+        var first=new Vue({
+            el : '#first'
+        });
+    </script>
+</body>
+</html>

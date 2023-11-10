@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;BoardRestController.java&apos; to &apos;safefood_spring/src/main/java/com.ssafy.fms.controller&apos;&#x0D;&#x0A;- Original project: &apos;BootRestBoardProject&apos;&#x0D;&#x0A;- Destination element: &apos;safefood_spring/src/main/java/com.ssafy.fms.controller&apos;&#x0D;&#x0A;- Original element: &apos;com.controller.BoardRestController.java&apos;" description="Copy compilation unit" destination="=safefood_spring/src\/main\/java&lt;com.ssafy.fms.controller" element1="/src\/main\/java&lt;com.controller{BoardRestController.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1574221702046" units="1" version="1.0"/>
+</session>

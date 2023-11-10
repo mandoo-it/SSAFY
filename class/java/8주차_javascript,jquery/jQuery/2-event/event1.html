@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type = "text/css">
+    /내부 파일 형식/
+    h1{
+        color:blue; /* 글자색 지정 */
+    }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+//jquery를 이용해서 사용자가 작성하는 스크립트부분
+//document(html)문서가 준비가 된 후 jquery를 실행하겠다는 의미
+$(document).ready(function() {
+	$('#hide').click(function() {
+		$('h1:first').hide(); //첫번째 h1태그만 적용해라
+	});
+	$('#show').click(function() {
+		$('h1').show();
+	});
+	$('h1').click(function(){
+		alert($(this).html()); //this --> h1사건이 발생한 대상
+	});
+	//$('h1').on('click', function(){
+		//alert($(this).html());
+	//});
+	$('h1').mouseenter(function() {
+		$(this).addClass('reverse');
+	});
+	$('h1').mouseleave(function() {
+		$(this).removeClass('reverse');
+	});
+});
+//$(function(){})
+</script>
+</head>
+<body>
+	<button id="hide">hide</button>
+	<button id="show">show</button>
+	<hr>
+	<h1>header-0</h1>
+	<h1>header-1</h1>
+	<h1>header-2</h1>
+</body>
+</html>

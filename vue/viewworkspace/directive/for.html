@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>v-for test</h1>
+        <template v-for="member in members">
+            <label><span v-text="member.num"></span></label>
+            <input type="text" v-bind:value="member.name">
+        </template>
+        <li v-for = "i in 10">
+            {{i}} * 5 = {{i * 5}}
+        </li>
+        <hr>
+        <ul>
+            <li v-for = "book in books">
+                I like "{{book}}"
+            </li>
+        </ul>
+        <hr>
+        <ul>
+            <li v-for = "(value, key, index) in story">
+               {{index+1}}.{{key}} : {{value}}
+            </li>
+        </ul>
+        <hr>
+        <ul>
+            <li v-for = "(story, index) in stories">
+               {{index}}.{{story.writer}} : {{story.title}}
+            </li>
+        </ul>
+    </div>
+    <script>
+        var vm = new Vue({
+        el : '#app',
+            data : {
+                books : ['햄릿','내머리에누가똥','변신'],
+                story : {
+                    author : '셰익스피어',
+                    title : '한 여름밤의 꿈',
+                    publisher : '윤규희'
+                },
+                stories : [
+                    {
+                        writer : 'james lee',
+                        title : 'good girl1'
+
+                },{
+                        writer : 'billy keen',
+                        title : 'good boys'
+                },{
+                        writer : 'onodjd',
+                        title : 'good boys2'
+                }
+                ],
+                members : [
+                    {
+                        num : '1',
+                        name : 'good girl1'
+                    },
+                    {
+                        num : '2',
+                        name : 'good girl2'
+                    },
+                    {
+                        num : '3',
+                        name : 'good girl3'
+                    }
+          ]
+        }
+        });
+    </script>
+</body>
+</html>

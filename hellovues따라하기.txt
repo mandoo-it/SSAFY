@@ -1,0 +1,43 @@
+https://nodejs.org/ko/download/
+최신 노드
+
+cd c:/ssafy
+mkdir vueproject
+cd C:\vueproject
+npm install -g npm
+npm install -g @vue/cli
+vue create hellovues
+defualt (babel,eslint) 선택(엔터)
+
+cd hellovues
+npm run serve
+방화벽 access 허용
+
+npm install axios --save
+npm install vue-router --save
+
+npm install vuex –-save
+npm install d3 –-save
+vue add element
+full import <- enter
+y <- 입력후 enter
+ko <- 업방향으로 ko 찾고 enter
+
+
+
+
+http-common.js 작성
+
+componets/CustomersList.vue 작성
+
+router.js 작성
+
+main.js 수정
+import router from './router' 추가
+
+
+
+npm run serve
+
+
+

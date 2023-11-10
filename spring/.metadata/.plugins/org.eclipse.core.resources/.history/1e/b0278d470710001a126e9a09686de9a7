@@ -1,0 +1,363 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+	<title>SafeFood | Q & A</title>
+	<!-- 합쳐지고 최소화된 최신 CSS -->
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+	<!-- 부가적인 테마 -->
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"/>
+	<style>
+	/* Remove the navbar's default margin-bottom and rounded borders */
+	.navbar {
+		margin-bottom: 0;
+		border-radius: 0; 
+	}
+	/* Add a gray background color and some padding to the footer */
+	footer {
+		background-color: #f2f2f2;
+		padding: 25px;
+	}
+	</style>
+	
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
+	
+</head>
+
+<body>
+	<div id="app">
+		<jsp:include page="nav.jsp"></jsp:include>
+		<p></p>
+		<p></p>
+		<div class="container">
+				<p></p>
+				<p></p>
+			<component v-bind:is = "currentview"></component>  
+		</div>
+	</div>
+	
+	<script type="text/x-template" id="list">
+        <div>
+            <h1>Q&A Search</h1>
+            <form id="target"  method="post" class="form-inline" @keyup.enter="search" @submit.prevent = "search">
+                <div class="form-group">
+                    <label for="key">검색조건</label>
+                    <select class="form-control" id="key" v-model = "condition">
+                        <option value="name" selected="selected">작성자</option>
+                        <option value="title">제목</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="word">검색단어</label>
+                    <input type="text" class="form-control" v-model ="word" placeholder="검색어를 입력하세요">
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="검색">
+                </div>
+            </form>
+			<table class="table table-borderless">
+				<thead>
+					<tr>
+						<th class="text-center">번호</th>
+						<th class="text-center">질문</th>
+						<th class="text-center">조회수</th>
+					</tr>
+				</thead>
+				<tbody>
+					<template v-for = "qna in result">
+						<tr @click = "read(qna.num)">
+							<td class="text-center" v-text="qna.num"></td>
+							<td class="text-center" v-text="qna.title"></td>
+							<td class="text-center" v-text="qna.count"></td>
+						</tr>
+					</template>
+				</tbody>
+			</table>
+			<div class="form-group ">
+               <c:if test="${not empty login}"> <button type="button" class="btn btn-primary btn-lg btn-group btn-block btn-default btn-animated" @click = "goadd">Q&A 등록하기</button></c:if>
+                <button type="button" class="btn btn-primary btn-lg btn-group btn-block btn-default btn-animated" v-if="check" @click = "goList" v-cloak>목록</button>
+			</div>
+        </div>
+	</script>
+	<script type="text/x-template" id="read">
+	 <div>
+		<div class="container">
+			<form id="form1" class="form-horizontal">
+				<h2>질 문</h2>
+				<div class="form-group">
+					<label>번호:</label> <input type="text" class="form-control" id="num" v-model="qna.num" readonly = "readonly">
+				</div>
+				<div class="form-group">
+					<label>이름:</label> <input type="text" class="form-control" id="name" v-model="qna.name">
+				</div>
+	
+				<div class="form-group">
+					<label>질문:</label> <input type="text" class="form-control" id="title" v-model="qna.title">
+				</div>
+				<div class="form-group">
+					<label>내용:</label> <input type="text" class="form-control" id="content" v-model="qna.content">
+				</div>
+				<div class="btn-group">
+					<input type="button" class="btn btn-primary" value="목록" @click="goList"/>
+					<input type="button" class="btn btn-primary" value="수정하기" @click="update"/>
+					<input type="button" class="btn btn-primary" value="삭제하기" @click="del"/>
+				</div>
+			</form>
+			</div>
+			 <div class="container">
+			<h2>답 변</h2>
+			<p><p><p><p><p><p>
+			<h4 v-if="!check2">[ 아직 답변이 없습니다. ]</h4>
+			<table v-if="check2" class="table table-borderless">
+				<thead>
+					<tr>
+						<th class="text-center">작성자</th>
+						<th class="text-center">답변</th>
+						<th class="text-center">&nbsp</th>
+					</tr>
+				</thead>
+				<tbody>
+					<template v-for = "ans in answer">
+						<tr>
+							<td class="text-center" v-text="ans.name"></td>
+							<td class="text-center" v-text="ans.content"></td>
+							<td class="text-center"><input type="button" v-if = "ans.name == aname" class="btn btn-primary" value="삭제하기" @click="delAns(ans.num)"/></td>
+						</tr>
+					</template>
+				</tbody>
+			</table>
+			<div class="btn-group">
+				<input type="button" class="btn btn-primary" value="추가하기" @click="addAns2"/>
+			</div>
+			<c:if test="${not empty login}">
+				<form id="form2" class="form-horizontal" v-if="check">
+				<div class="form-group">
+					<label>이름:</label> <input type="text" class="form-control" id="name" v-model="aname" readonly = "readonly">
+				</div>
+				<div class="form-group">
+					<label>내용:</label> <input type="text" class="form-control" id="content" v-model="acontent">
+				</div>
+				<div class="btn-group">
+					<input type="button" class="btn btn-primary" value="추가하기" @click="addAns"/>
+				</div>
+			</form>	</c:if>
+		</div>
+</div>
+	</script>
+	<script type="text/x-template" id="add">
+		<div class="container">
+			<form id="form1" class="form-horizontal">
+					<h2>질문과 질의</h2>
+					<div class="form-group">
+						<label>이름:</label> <input type="text" class="form-control" id="name" v-model="name" readonly = "readonly">
+					</div>
+		
+					<div class="form-group">
+						<label>질문:</label> <input type="text" class="form-control" id="title" v-model="title">
+					</div>
+					<div class="form-group">
+						<label>내용:</label> <input type="text" class="form-control" id="content" v-model="content">
+					</div>
+					<div class="btn-group">
+                        <input type="button" class="btn btn-primary" value="새 질문 등록" @click="addQnA"/> 
+                        <input type="button" class="btn btn-primary" value="목록" @click="goList"/>
+					</div>
+				</form>
+			 </div>
+    </script>
+    <script type="text/javascript">
+        var list = Vue.component('list',{
+			template : '#list',
+			data() {
+				return {
+                    result : [],
+                    condition : '',
+                    word : '',
+                    check : false
+				}
+			}, methods : {
+				 allQnA() {
+	                    axios
+	                    .get('http://localhost:9090/safefood/qnas')
+	                    .then(response => {
+	                            this.result = response.data //비동기 처리 요청
+	                            console.log(response.data) //성공적으로 결과가 도착한 후
+                        });
+                        this.check = false;
+					},
+					read(num) {
+						App.qid = num;
+                        App.currentview = 'read';
+						App.showlist(1);
+					},
+					goadd() {
+						App.currentview = 'add';
+						App.showlist(2);
+                    },
+                    search() {
+						this.check = true;
+						if(this.word.length == 0) {
+							this.allQnA();
+							App.showlist(0);
+						}
+						
+						else {
+							axios
+		                    .get('http://localhost:9090/safefood/qnas/' + this.condition + '/' + this.word)
+		                    .then(response => {
+		                            this.result = response.data //비동기 처리 요청
+		                            console.log(response.data) //성공적으로 결과가 도착한 후
+		                    });
+						}
+					
+                    },
+                    goList : function (val) {
+                        this.check = false;
+                        this.condition = "";
+                        this.word = "";
+                        this.allQnA();
+					    App.showlist(0);
+				}
+			
+			},
+			mounted () {
+                this.allQnA();
+            }
+		}); 
+
+		var read = Vue.component('read',{
+			template : '#read',
+			data() {
+				return {
+					qna : [],
+					answer : [],
+					check2 : false,
+					aname : '<%=(String)session.getAttribute("login")%>',
+					acontent : '',
+					check : false
+				}
+			}, mounted () {
+				axios
+				.get('http://localhost:9090/safefood/qnas/'+App.qid)
+				.then(response => {
+						this.qna = response.data //비동기 처리 요청
+						console.log(response.data) //성공적으로 결과가 도착한 후
+				});
+				
+				this.getAnswers();
+			} ,
+			methods:{
+				goList : function (val) {
+					App.showlist(0);
+				},
+				update() {
+                    axios
+                    .put('http://localhost:9090/safefood/qnas',{num:this.qna.num, title : this.qna.title, content : this.qna.content})
+                    .then(response => {
+                    	this.name = "";
+                      	this.title = "";
+						this.content = "";
+						App.showlist(0);
+                    });
+				},
+				del() {
+					axios
+                    .delete('http://localhost:9090/safefood/qnas/' + App.qid)
+                    .then(response => {
+                    	this.name = "";
+                      	this.title = "";
+						this.content = "";
+						App.showlist(0);
+                    });
+				},
+				getAnswers() {
+					axios
+                    .get('http://localhost:9090/safefood/answer/' + App.qid)
+                    .then(response => {
+                    	this.answer = response.data;
+                    	if(this.answer.length > 0) this.check2 = true;
+                    });
+				},
+				addAns() {
+					axios
+                    .post('http://localhost:9090/safefood/answer',{num:null, qnum : App.qid, name : this.aname, content : this.acontent}) 
+                    .then(response => {
+                           this.getAnswers();
+                           this.check = false;
+                    });
+				},
+				addAns2() {
+					this.check = true;
+				},
+				delAns(val) {
+					axios
+                    .delete('http://localhost:9090/safefood/answer/' + val) 
+                    .then(response => {
+                           this.getAnswers();
+                    });
+				}
+            }
+		}); 
+
+		
+		var add = Vue.component('add',{
+			template : '#add',
+			data() {
+				return {
+					name: '<%=(String)session.getAttribute("login")%>',
+					title : '',
+					content : ''
+				}
+			}, 
+			methods:{
+				addQnA() {
+					if(this.name.length == 0) alert("이름을 입력해주세요")
+					else if(this.title.length == 0) alert("질문을 입력해주세요")
+					else if(this.content.length == 0) alert("내용을 입력해주세요")
+					else {
+						axios
+						.post('http://localhost:9090/safefood/qnas',{name:this.name, title : this.title, content : this.content})
+						.then(response => {
+							App.showlist(0);
+						});
+					}
+                },
+                goList() {
+                    	App.showlist(0);
+				}
+			}
+		}); 
+		
+		var App=new Vue({
+			  el: '#app',
+			  data: {
+				  qid:'',
+				  currentview: 'list',
+			      allviews:['list', 'read','add']
+			   },
+			   components: {
+				   list :  list,
+				   read : read,
+				   add : add
+			     },
+			     methods:{
+			    	 showlist: function (val) {
+						 this.currentview=this.allviews[val];
+			         }
+			     }
+			});
+    	</script>
+	</body>
+</html>

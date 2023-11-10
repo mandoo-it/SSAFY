@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+    <!-- diresctive : 화면요소를 좀 더 쉽게 조작하기 위해서 -->
+    <div id="app">
+        {{msg}}<br>
+        <div v-text='msg'></div> <!--text로 인식-->
+        <div v-html='msg'></div>  <!-- diresctive : 태그를 다 인식함 -->
+        <hr>
+        <!-- v=if : 조건에 따라 화면에 표시, 조건에 맞아야만 태그가 생성됨 조건에 맞지 않는 경우 주석 처리 됨 -->
+        <a v-if="flag" herf="#">gogo view!</a>   <!--화면이 잘 안바귈 때-->
+        <!-- <a v-else href="#">stop vue!</a> -->
+        <hr>
+        <a v-show="flag" href="#">hello</a>  <!--화면이 많이 바뀔 때-->
+        <hr>
+        <ul>
+            <li v-for="system in systems">
+                {{system}}
+            </li>
+        </ul>
+        <hr>
+        <h3 v-bind:id="uid">welcome,amie!</h3>
+        <img :src="src">  <!--화면이 많이 바뀔 때-->
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+               flag : true,
+               flag2 : false,
+               systems : ['android', 'ios', 'windows'],
+               msg : '<h1>welcome to vue!!!!<h1>',
+               uid : 'a999',
+               src : '../img/a.jpg'
+            }
+        });
+    </script>
+</body>
+</html>

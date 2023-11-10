@@ -1,0 +1,275 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>SafeFood | 송다은 윤규희</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<link
+	href="https://fonts.googleapis.com/css?family=Poor+Story&display=swap"
+	rel="stylesheet">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
+
+
+<style>
+/* Remove the navbar's default margin-bottom and rounded borders */
+.navbar {
+	margin-bottom: 0;
+	border-radius: 0;
+}
+
+/* Add a gray background color and some padding to the footer */
+footer {
+	background-color: white;
+	padding: 25px;
+}
+
+select {
+	height: 32px;
+	width: 250px;
+}
+
+h2, h5, label, option {
+	font-family: 'Poor Story', cursive;
+}
+
+.img-height {
+	height: 300px;
+	width: 300px;
+}
+
+.jumbotron {
+	height: 350px;
+	background-image: url("img/food1.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	color: white;
+}
+
+.scale {
+	transform: scale(1);
+	-webkit-transform: scale(1);
+	-moz-transform: scale(1);
+	-ms-transform: scale(1);
+	-o-transform: scale(1);
+	transition: all 1s ease-in-out; /*자연스러운 확대 축소 위해서*/
+}
+
+.scale:hover {
+	transform: scale(1.2); /*이미지 hover 했을경우 transform: scale() 값을 키워 확대*/
+	-webkit-transform: scale(1.2);
+	-moz-transform: scale(1.2);
+	-ms-transform: scale(1.2);
+	-o-transform: scale(1.2);
+}
+
+#iname{
+	padding-left: 20px;
+}
+</style>
+<script type="text/javascript">
+	$(document).ready(function() {
+	    var date = new Date();
+	
+	    var day = date.getDate();
+	    var month = date.getMonth() + 1;
+	    var year = date.getFullYear();
+	
+	    if (month < 10) month = "0" + month;
+	    if (day < 10) day = "0" + day;
+	
+	    var today1 = year + "-" + month + "-" + day;   
+	    var today2 = year + "-" + month + "-" + day;   
+	    
+	    if(<%=request.getAttribute("date1")%>!= null) today1 = "<%=request.getAttribute("date1")%>";
+	    if(<%=request.getAttribute("date2")%>!= null) today2 = "<%=request.getAttribute("date2")%>";
+	    
+	    $("#date1").attr("value", today1);
+	    $("#date2").attr("value", today2);
+	});
+	
+	
+</script>
+</head>
+
+<body>
+<jsp:include page="nav.jsp"></jsp:include>
+	
+	<div class="container">
+		
+		<c:if test="${empty list}">
+			<br><br>
+			<h1 align="center">해당 기간에 추가한 음식이 없습니다.</h1>
+			<br><br><br>
+			<form id="target" class="form-inline" action= "date">
+			시작&nbsp;<input type="date" id=date1 name=date1 > &nbsp; 끝&nbsp;<input type="date" id=date2 name=date2> &nbsp;
+			<input type="submit" value="검색">
+		</form>
+		</c:if>
+	
+		<c:if test="${not empty list}">
+		
+		<br>
+		<h1 align="center">섭취한 음식 목록</h1>
+		<br><br>
+		
+		<form id="target" class="form-inline" action= "date">
+			시작&nbsp;<input type="date" id=date1 name=date1 > &nbsp; 끝&nbsp;<input type="date" id=date2 name=date2> &nbsp;
+			<input type="submit" value="검색">
+		</form>
+		<br>
+		
+		<table id="tdata" class="table" border="1">
+			<tr bgcolor="#d8d8d8"><td align="center" >식품명</td><td align="center">섭취 갯수</td></tr>
+			<c:forEach var = "i" items="${list}">
+			<tr><td id = "iname">${i.name}</td><td align="center">${i.count }</td></tr>
+			</c:forEach>
+		</table>
+		
+		<div class="row">
+		
+		<div class="col-md-5">
+			<canvas id="chartcanvas" width="600" height="430"></canvas>
+		</div>
+		<div class="col-md-1"></div>
+		<div class="col-md-4">
+			<h4 class="space-top">영양 정보</h4>
+			<table class="table">
+				<tbody>
+					<tr>
+						<td width='200'>일일 제공량</td>
+						<td id="td1">${f.supportpereat}</td>
+					</tr>
+					<tr>
+						<td width='200' style="background-color: #ff9999">칼로리</td>
+						<td id="td2">${f.calory}</td>
+					</tr>
+					<tr>
+						<td width='200' style="background-color: #ffcc99">탄수화물</td>
+						<td id="td3">${f.carbo}</td>
+					</tr>
+					<tr>
+						<td width='200' style="background-color: #ffff99">단백질</td>
+						<td id="td4">${f.protein}</td>
+					</tr>
+					<tr>
+						<td width='200' style="background-color: #e6ff99">지방</td>
+						<td id="td5">${f.fat}</td>
+					</tr>
+					<tr>
+						<td width='200' style="background-color: #99ffe6">당류</td>
+						<td id="td6">${f.sugar}</td>
+					</tr>
+					<tr>
+						<td width='200' style="background-color: #99ccff">나트륨</td>
+						<td id="td7">${f.natrium}</td>
+					</tr>
+					<tr>
+						<td width='200' style="background-color: #b399ff">콜레스테롤</td>
+						<td id="td8">${f.chole}</td>
+					</tr>
+					<tr>
+						<td width='200' style="background-color: #ff99ff">포화 지방산</td>
+						<td id="td9">${f.fattyacid}</td>
+					</tr>
+					<tr>
+						<td width='200' style="background-color: #cccccc">트렌스지방</td>
+						<td id="td10">${f.transfat}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<div class="col-md-2"></div>
+	</div>
+		</c:if>
+	</div>
+	
+	
+	
+<jsp:include page="footer.jsp"></jsp:include>
+
+</body>
+
+<script type="text/javascript">
+
+	var canvas = document.getElementById("chartcanvas");
+	var context = canvas.getContext("2d");
+	var sw = canvas.width;
+	var sh = canvas.height;
+	var PADDING = 50;
+	
+	var temp6 = $('#td6').text();
+	if (temp6 == 'N/A')temp6 = 0;
+	
+	var temp8 = $('#td8').text();
+	if (temp8 == 'N/A')temp8 = 0;
+	
+	var temp9 = $('#td9').text();
+	if (temp9 == 'N/A')temp9 = 0;
+	
+	var temp10 = $('#td10').text();
+	if (temp10 == 'N/A')temp10 = 0;
+	
+	var data = [
+	$('#td2').text() * 1,
+	$('#td3').text() * 1,
+	$('#td4').text() * 1,
+	$('#td5').text() * 1,
+	temp6 * 1,
+	$('#td7').text() * 1,
+	temp8 * 1,
+	temp9 * 1,
+	temp10 * 1 ];
+	for ( var i in data)
+	console.log(data[i]);
+	
+	var colors = [ "#ff9999","#ffcc99","#ffff99","#e6ff99","#99ffe6","#99ccff","#b399ff","#ff99ff","#cccccc" ];
+	
+	var center_X = sw / 2;
+	var center_Y = sh / 2;
+	
+	var radius = Math.min(sw- (PADDING * 2), sh- (PADDING * 2)) / 2;
+	var angle = 0;
+	var total = 0;
+	for ( var i in data) {
+		total += data[i];
+	}
+	
+	function AddText(context,strN, strR, colors,text_xcoord,text_ycoord) {
+		context.textAlign = "left";
+		context.fillStyle = colors;
+		context.font = "12pt Century Gothic";
+		context.fillText(strN,text_xcoord,text_ycoord);
+		context.fillText(strR,text_xcoord,text_ycoord + 20);
+	};
+	
+	for (var i = 0; i < data.length; i++) {
+	context.fillStyle = colors[i];
+	context.beginPath();
+	context.moveTo(
+		center_X,
+		center_Y);
+	context.arc(center_X,center_Y,radius,angle,angle+ (Math.PI * 2 * (data[i] / total)));
+	context.lineTo(center_X,center_Y);
+	context.fill();
+	angle += Math.PI* 2* (data[i] / total);}
+	
+
+</script>
+</html>

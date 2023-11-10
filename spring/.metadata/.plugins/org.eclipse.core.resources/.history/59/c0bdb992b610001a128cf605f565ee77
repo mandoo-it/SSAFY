@@ -1,0 +1,20 @@
+package com.ssafy.fms.service;
+
+import java.util.List;
+
+import com.ssafy.fms.vo.Add;
+import com.ssafy.fms.vo.Intake;
+
+public interface AddService {
+
+	public List<Add> selectAll(String id);
+	
+	public void insert(Add i);
+	
+	public void update(Add i);
+	
+	public void delete(Add i);
+	
+	public List<Intake> selectToday(String id);
+	
+}

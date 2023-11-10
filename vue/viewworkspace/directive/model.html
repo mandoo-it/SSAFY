@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- v-bind : 화면이 바뀐다고 값이 바뀌지 않는다.  -->
+        v-bind : <input v-bind:value="message"><br>
+        <!-- v-model : vue 인스턴스의 데이터와 화면요소를 양방향으로 연결 -->
+        v-bind : <input v-model="message2"><br>
+        {{message}}
+        <Br>
+        {{message2}}
+    </div>
+    <script>
+        var vm = new Vue({
+            el : '#app',
+            data : {
+                message : 'hello boy',
+                message2 : 'help me'
+            }
+        })
+    </script>
+</body>
+</html>

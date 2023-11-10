@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script type="text/javascript">
+			//1. max(a, b): 숫자 두 개를 입력 받아 큰 수를 리턴
+			function max(a, b){
+				return (a > b) ? a : b;
+			}
+			document.write(max(3, 4) + "<br>");
+			
+			//2. printName(name): 이름을 입력 받아 그 앞에 'hello!'를 붙여 브라우저에 출력
+			function printName(name){
+				document.write("hello! " + name + "<br>");
+			}
+			printName("lala");
+			
+			//3. getArea(r): 반지름 r을 입력 받아 원면적을 계산해 리턴
+			function getArea(r){
+				return r*r*Math.PI;
+			}
+			document.write(getArea(2) + "<br>");
+			
+			//4. reverse(flag): boolean 값 한 개를 입력 받아 그 반대의 값을 리턴
+			function reverse(flag){
+				return !flag;
+			}
+			document.write(reverse(true) + "<br>");
+			
+			//5. loopString(msg, count): 문자열 msg를 count번만큼 반복해 브라우저에 한 줄에 하나씩 출력
+			function loopString(msg, count){
+				for(var i = 0; i < count; i++){
+					document.write(msg + "<br>");
+				}	
+			}
+			loopString("안녕", 3);
+			
+			//6. calc(a, b, op): 숫자 두 개 (a, b)와 연산자(op: +. -, *, /) 하나를 입력 받아 연산 수행 후 결과를 alert()로 출력
+			function calc(a, b, op){
+				switch(op){
+					case '+':
+						return a + b;
+					case '-':
+						return a - b;
+					case '*':
+						return a * b;
+					case '/':
+						return a / b;
+				}
+			}
+			alert(calc(3, 2, '*'));
+			
+		</script>
+	</head>
+	
+	<body>
+	
+	</body>
+</html>

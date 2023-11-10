@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script type="text/javascript">
+			function test(num){
+				switch(num){
+					case 1:
+						alert("click event!!!!");
+						break;
+					case 2:
+						alert("mouseover event!!!!");
+						break;
+					case 3:
+						print();
+						break;
+					case 4:
+						open("http://www.daum.net", "_self", "width=300px height=300px"); //open(): window가 갖는 메소드-> popup창 열기
+						break;
+					case 5:
+						close();
+						break;
+				}
+			}
+		</script>
+	</head>
+	
+	<body>
+		<h1 onclick="alert('제목이지롱')">event test</h1> <!-- 바로 써줘도 됨 -->
+		<input type="button" value="press"><br> <!-- 이것도 버튼! -->
+		<!-- onclick, onmouseover: 이벤트핸들러 -->
+		<button onclick="test(1)">click</button><br>
+		<button onmouseover="test(2)">mouseover</button><br>
+		<button onclick="test(3)">print</button><br>
+		<button onclick="test(4)">open</button><br>
+		<button onclick="test(5)">close</button><br>
+	</body>
+</html>

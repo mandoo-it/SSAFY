@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script type="text/javascript">
+			// p.145 참고, 내장함수
+			function showTime(){
+				var time = new Date();
+				document.write(time.toString() + "<br>");
+			}
+			
+			function stop(){
+				clearInterval(t); // 반복 작업 멈춤
+				// clearTimeout(t); // 한 번 작업 멈춤
+			}
+			
+			var t = setInterval(showTime, 1000); // 1초 간격으로 함수 반복 실행
+			setTimeout(stop, 5000); // 5초 후 함수 한 번 실행
+		</script>
+	</head>
+	
+	<body>
+	
+	</body>
+</html>

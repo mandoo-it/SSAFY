@@ -1,0 +1,48 @@
+package com.ssafy.fms.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.ssafy.fms.vo.Answer;
+import com.ssafy.fms.vo.Board;
+import com.ssafy.fms.vo.QnA;
+
+
+@Component("adao")
+public class AnswerDaoImpl implements AnswerDao{
+   
+	@Autowired
+	SqlSession session;
+	
+	@Override
+	public List<Answer> selectAll() {
+		return session.selectList("answer.selectAll");
+	}
+
+	@Override
+	public Answer selectOne(String num) {
+		return session.selectOne("answer.selectOne", num);
+	}
+
+	@Override
+	public void insert(Answer b) {
+		session.insert("answer.insert", b);
+	}
+
+	@Override
+	public void delete(String num) {
+		session.delete("answer.delete", num);
+	}
+
+	@Override
+	public void update(Answer b) {
+		session.update("answer.update", b);
+		
+	}
+
+}
+
+

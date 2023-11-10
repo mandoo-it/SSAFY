@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper file: 실행 할 쿼리 문을 저장하는 파일. 테이블 하나당 한개씩 작성
+namespace: 작업하는 테이블들을 구분해주기 위한 식별자 daoimpl에서 쓴다. 테이블이 1개면 함수명이 겹치지않아서 namespace.select 가 아니라 그냥 select만 dao에서 써도 가능-->
+<mapper namespace="customer">
+
+<!-- 리절트 맵 정의 : select 한 후의 결과 처리를 위해 정의 해 놓음-->
+   <resultMap id="CustomerResult"  type="Customer">
+     <result property="num" column="num"/>
+     <result property="name" column="name"/>
+     <result property="address" column="address"/>
+   </resultMap>
+   
+   <!-- column명을 별칭으로 준다.  -->
+   <resultMap id="JoinResult"  type="Customer">
+     <result property="num" column="empid"/>
+     <result property="name" column="fname"/>
+     <result property="address" column="deptname"/>
+   </resultMap>
+  
+  <select id="joinSelect" resultMap="JoinResult">
+  	select e.empid empid, e.fname fname, d.deptname deptname <!-- 꼭 별칭을 줘야한다 조인 할 때  -->
+  	from emp e, dept d
+  	where e.deptid = d.deptid;
+  </select>
+  <select id="selectAll" resultMap="CustomerResult">
+    select * from customer order by num
+  </select>
+  
+  <select id="selectOne" parameterType="string" resultMap = "CustomerResult">
+  	select * from customer where num = #{num}
+  </select>
+  
+  <insert id="insert" parameterType="Customer">
+  	insert into customer values(#{num} , #{name}, #{address})
+  </insert>
+  
+   <delete id="delete" parameterType="string">
+  		delete from customer where num = #{num}
+  </delete>
+  <update id="update" parameterType="Customer">
+  	update customer set address = #{address}, name = #{name} where num = #{num}
+  </update>
+<!-- resultType="Customer" vo를 type으로 불렀다. paramterType vo에 자동으로 넣어줘서 resultmap이라는게 필요없어진다. -->
+  
+  
+  
+
+
+
+</mapper>
+
+
+
+
+
+

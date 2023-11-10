@@ -1,0 +1,20 @@
+package com.ssafy.fms.dao;
+
+import java.util.List;
+
+import org.springframework.transaction.annotation.Transactional;
+
+import com.ssafy.fms.vo.Answer;
+import com.ssafy.fms.vo.Board;
+import com.ssafy.fms.vo.QnA;
+
+
+
+public interface AnswerDao {
+	public List<Answer> selectAll();
+	public Answer selectOne(String num);
+	public void insert(Answer c);
+	public void delete(String num);
+	public void update(Answer b);
+
+}

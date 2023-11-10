@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper file: 실행 할 쿼리 문을 저장하는 파일. 테이블 하나당 한개씩 작성
+namespace: 작업하는 테이블들을 구분해주기 위한 식별자 -->
+<mapper namespace="board">
+
+<!-- 리절트 맵 정의 : select 한 후의 결과 처리를 위해 정의 해 놓음-->
+   <resultMap id="BoardResult"  type="Board">
+   	<result property="num" column="num"/>
+     <result property="pass" column="pass"/>
+     <result property="name" column="name"/>
+     <result property="wdate" column="wdate"/>
+     <result property="title" column="title"/>
+     <result property="content" column="content"/>
+     <result property="count" column="count"/>
+   </resultMap>
+
+  <select id="selectAll" resultMap="BoardResult">
+    select * from board
+  </select>
+  
+  <select id="selectOne" resultMap="BoardResult" parameterType="string">
+  
+  	select * from board where num = #{num}
+  </select>
+	
+	
+	<insert id="insert" parameterType="Board" >
+   		insert into board values(null,#{pass},#{name}, curdate() ,#{title},#{content},0)
+   </insert>
+   
+ 	<update id="update" parameterType="Board">
+   		update board set title = #{title}, content = #{content}  where num = #{num}
+   </update> 
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from board where num = #{num}
+	</delete>
+	
+	<select id="findByTitle" parameterType="java.lang.String" resultMap="BoardResult">
+		select * from board where title = #{title}
+	</select>
+	
+	<select id="findByTitle2" parameterType="java.lang.String" resultMap="BoardResult">
+		select * from board where title like #{title}
+	</select>
+	
+	<select id="findByName" parameterType="java.lang.String" resultMap="BoardResult">
+		select * from board where name = #{name}
+	</select>
+  
+  
+	  <update id = "countUp"  parameterType="java.lang.String">
+	  		update board set count = count + 1 where num = #{num}
+	  </update>
+  
+
+
+</mapper>
+
+
+
+
+
+

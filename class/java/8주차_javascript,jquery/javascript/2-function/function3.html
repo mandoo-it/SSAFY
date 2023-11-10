@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script type="text/javascript">
+			// 익명 함수: 이름이 없는 함수
+			
+			//1. 변수에 저장
+			var f1 = function(){
+				alert('hello');
+			}
+		
+			f1();
+			
+			//2. parameter로 사용 가능
+			function funtest(some){
+				some(); // 함수로 호출
+			}
+			
+			
+			function go(){
+				alert('gogogogo~');
+			}
+			
+			funtest(f1);
+			funtest(go);
+			funtest(function(){ // 직접 함수 넣어줘
+				alert('byeeeeeeee')
+			});
+			
+			//3. return 값으로도 사용 가능
+			function test(){
+				return function(){ // return에 함수 사용!
+					alert("here I go!!!");
+				}
+			}
+			var xx = test();
+			xx();
+			test()(); // return하는 함수 실행!
+			
+		</script>
+	</head>
+	
+	<body>
+	
+	</body>
+</html>

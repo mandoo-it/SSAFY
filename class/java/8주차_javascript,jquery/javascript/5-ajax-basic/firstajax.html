@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	var xhr = null;
+	function getXHR() { //ajax통신을 하기위한 객체(xmlHttpRequest)생성
+		return new XMLHttpRequest();
+	}
+	function getData() { //ajax 요청 준비
+		xhr = getXHR(); 
+		xhr.open("get", "firstajax.jsp", true);//비동기통신 true이면 
+		xhr.onreadystatechange = callback;//readyState 값이 바뀔때마다 실행할 callback함수 지정
+		xhr.send(null); //ajax요청 전송. 서버로 요청하는 방식이  get방식이면 send메소드 파라미터는 null
+	}
+	function postData() { //
+		xhr = getXHR(); 
+		xhr.open("post", "firstajax.jsp", true);//비동기통신 true이면 
+		xhr.onreadystatechange = callback;//readyState 값이 바뀔때마다 실행할 callback함수 지정
+		xhr.send(); //ajax요청 전송. 서버로 요청하는 방식이  get방식이면 send메소드 파라미터는 null
+	}
+	
+	function callback() { //callback 함수
+		if(xhr.readyState == 4 && xhr.status == 200) {
+			var display = document.getElementById("display");
+			display.value = xhr.responseText;
+		}
+	}
+
+</script>
+</head>
+<body>
+	<h1>ajax test</h1>
+	<button onclick="getData()">get data</button>
+	<button onclick="postData()">post data</button>
+	<hr>
+	<textarea id="display" rows="10">wow..</textarea>
+</body>
+</html>

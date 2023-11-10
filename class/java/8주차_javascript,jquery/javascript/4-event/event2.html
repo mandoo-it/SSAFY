@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<style type="text/css">
+			.some{
+				font-familiy: 굴림체;
+				color: red;
+			}
+		</style>
+		<script type="text/javascript">
+			function idcheck(){
+				//1. 사용자가 입력한 id를 알아와서 중복체크 후 span에 메세지 표시	
+				var id = document.getElementById("id");
+				var msg = document.getElementById("msg");
+				if(id.value == 'tommy'){
+					msg.style.color = 'red'; // javascript에서 css 조정할 때 style로 지정
+					msg.style.fontFamily = '굴림체';
+					msg.innerHTML = "<h5 style='display:inline'> 사용중인 ID 입니다. </h5>"; // span에 내용 써주기
+															// div, span, p에 값 넣을 때는 innerHTML로 넣어야함!
+					id.value = ""; // 공백으로 바꿔줌
+				}
+				else if(id.value == ''){
+					msg.innerHTML = " ID를 입력해주세요";
+				}
+				
+				else{
+					msg.style.color = 'blue';
+					msg.style.fontFamily = '굴림체';
+					msg.innerHTML = "<h5 style='display:inline'> 사용 가능한 ID 입니다. </h5>";
+				}
+			}
+			
+			function check(){
+				// pass 길이 체크 후 메세지 alert로 표시하고 다 맞으면 폼 전송
+				var pass = document.getElementById("pass");
+				if(pass.value.length < 6){
+					alert("PW 길이가 짧습니다!");
+					return;
+				}
+				else{
+					
+				}
+			}
+		</script>
+		
+	</head>
+	
+	<body>
+		<h1>Login</h1>
+		<form method="post" id="f"> <!-- post 사용하면 id, pw 입력한 값이 주소창에x -->
+			ID: <input type = "text" name = "id" id="id" onblur="idcheck()"><span id="msg"></span><br> <!-- DOM 사용하려면 ID 필요 -->
+																									   <!-- onblur: id칸 떠나면 idcheck() 실행됨 -->
+			PW: <input type = "password" name = "pass" id="pass">&nbsp; (6~10글자 사이)<p>
+			<input type = "button" value = "회원가입" onclick="check()">
+			<input type = "reset" value = "취소">
+		</form>
+	</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>알러지 정보</h1>
+        <h2>{{title}}</h2>
+        <fieldset id="checkboxArea">
+            <template v-for="option in allergen">
+                <input type="checkbox" name="box" v-bind:value="option" v-model = "allergyList">
+                <label>{{ option }}</label>
+            </template>
+        </fieldset>
+        <fieldset id="result" v-show='sizecheck'>
+        
+        <template v-for="(option, index) in allergyList">
+            <i style="color: red">{{index + 1}} : </i>
+            <b>{{option}}</b> 
+            <br>
+        </template>
+        </fieldset>
+        <button @click="count">ok</button>
+    </div>
+    <script>
+        var data = {
+            allergen : ["대두","땅콩","우유","게","새우","참치","연어","쑥","소고기","닭고기","돼지고기","복숭아","민들레","계란흰자"] ,
+            title : '알레르기 체크',
+            allergyList : [] //체크박스에서 체크한 값들이 들어감
+        }
+        var vm = new Vue({
+            el : '#app',
+            data : data, 
+            computed:{      //관심을 두고있는 message 데이터가 변동이 없으면 실행하지 않음 
+                sizecheck(){    //hello: function(){}
+                    if(this.allergyList.length > 0)
+                        return true;
+                    else 
+                        return false;   
+                }
+            },
+            methods: {
+               count: function(){
+                   alert(this.allergyList.length +" 개 선택되었습니다~!") 
+               }
+            }
+
+        });
+    </script>
+</body>
+</html>

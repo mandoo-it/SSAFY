@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper file: 실행 할 쿼리 문을 저장하는 파일. 테이블 하나당 한개씩 작성 namespace: 작업하는 테이블들을 
+	구분해주기 위한 식별자 -->
+<mapper namespace="fms.member">
+
+	<select id="selectAll" resultType="Member">
+		select * from memberdb
+	</select>
+	
+	<select id="selectOne" resultType="Member" parameterType="java.lang.String">
+		select * from memberdb where id=#{id}
+	</select>
+	
+	<insert id="insert" parameterType="Member">
+		insert into memberdb
+		values(#{id},#{pass},#{name},#{address},#{phone},#{allergy},#{weight},#{rank})
+	</insert>
+	
+	<update id="update" parameterType="Member">
+		update memberdb set pass = #{pass}, name=#{name}, address = #{address}, phone=#{phone}, allergy=#{allergy},weight = #{weight},rank = #{rank}  where id=#{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from memberdb where id=#{id}
+	</delete>	
+	
+</mapper>

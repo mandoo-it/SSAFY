@@ -1,0 +1,8 @@
+-- SpringBoot Project --
+1. 프로젝트 내 SQL.sql 파일에서 쿼리문 실행
+2. sts 실행
+3. src/main/java 폴더 ->
+   com 패키지 ->
+   BootSafeFoodProjectApplication.java ->
+   Run as (JavaApplication)
+4. 크롬 실행 -> 주소 [ http://localhost:9090/safefood/ ]

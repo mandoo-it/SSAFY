@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;BoardMapper.xml&apos; to &apos;SpringRest/src/main/resources/mapper&apos;&#x0D;&#x0A;- Original project: &apos;SpringMVCTest&apos;&#x0D;&#x0A;- Destination element: &apos;SpringRest/src/main/resources/mapper&apos;&#x0D;&#x0A;- Original element: &apos;BoardMapper.xml&apos;" description="Copy file" destination="=SpringRest/src\/main\/resources&lt;mapper" element1="src/main/resources/spring/BoardMapper.xml" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1572407182617" units="0" version="1.0"/>
+</session>

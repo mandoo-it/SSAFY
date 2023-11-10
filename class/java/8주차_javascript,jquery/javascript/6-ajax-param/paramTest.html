@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	var xhr = null;
+
+	function getXHR() {
+		return new XMLHttpRequest();
+	}
+
+	function sendGet() {
+
+		var name = document.getElementById("name"); //body에서 name을 찾아온 다음 변수에 넣음
+		var address = document.getElementById("address"); //body에서 address를 찾아온 다음 변수에 넣음
+
+		var param = "?name=" + name.value + "&address=" + address.value; //paramTest.jsp의 값 처리를 위한 변수처리, 너무 길어질 경우를 대비함
+
+		xhr = getXHR();
+		xhr.open("get", "paramTest.jsp" + param, true);
+		xhr.onreadystatechange = callback;
+		xhr.send(null);
+
+		name.value = "";
+		address.value = "";
+	}
+
+	function sendPost() {
+
+		var name = document.getElementById("name"); //body에서 name을 찾아온 다음 변수에 넣음
+		var address = document.getElementById("address"); //body에서 address를 찾아온 다음 변수에 넣음
+
+		var param = "name=" + name.value + "&address=" + address.value; //post 방식은 get과 다르게 ?를 적지 않는다.
+
+		xhr = getXHR();
+		xhr.open("post", "paramTest.jsp", true); // post 방식은 .jsp 뒤에 param 값(body ID)을 붙여주지 않는다.
+		xhr.onreadystatechange = callback;
+		
+		//post방식으로 데이터 보낼 때 지정해야 함
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+		
+		xhr.send(param); //send할 때 param을 넘겨준다.
+
+		name.value = "";
+		address.value = "";
+	}
+
+	function callback() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var result = document.getElementById("result");
+			result.innerHTML = "<h1>" + xhr.responseText +"</h1>"; //div, span, p 태그 안에 값을 넣을 때는 innerHTML로 넣음
+			//나머지 입력칸들은 value로 값 넣음
+		}
+	}
+</script>
+</head>
+<body>
+	<h1>ajax param test</h1>
+	name:
+	<input type="text" id="name">
+	<br> address:
+	<input type="text" id="address">
+	<br>
+
+	<button onclick="sendGet()">send get</button>
+	<button onclick="sendPost()">send post</button>
+	<hr>
+	<div id="result"></div>
+
+</body>
+</html>

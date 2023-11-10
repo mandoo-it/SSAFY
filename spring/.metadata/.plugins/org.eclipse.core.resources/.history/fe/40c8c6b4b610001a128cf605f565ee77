@@ -1,0 +1,40 @@
+package com.ssafy.fms.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ssafy.fms.dao.IntakeDao;
+import com.ssafy.fms.vo.Intake;
+
+@Service
+public class IntakeServiceImpl implements IntakeService {
+
+	@Autowired
+	IntakeDao dao;
+	
+	@Override
+	public List<Intake> selectAll(String id) {
+		return dao.selectAll(id);
+	}
+
+	@Override
+	public void insert(Intake i) {
+		dao.insert(i);
+	}
+
+	@Override
+	public void update(Intake i) {
+		dao.update(i);
+	}
+
+	@Override
+	public List<Intake> selectToday(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+	
+}

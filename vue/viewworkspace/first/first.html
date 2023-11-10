@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue"></script> <!--1) vue library loading-->
+</head>
+<body>
+    <!-- MVVM 패턴에서 view: 화면구성요소.html tag로 표시 -->
+    <!-- 1. 뷰 라이브러리 로딩
+        2. 화면 생성
+        3. 뷰 객체 생성
+        4. 화면과 뷰 연결
+        5. 화면 내용 변환
+        6. 확인
+    -->  
+    <div id="app">
+        {{message}}<hr>
+        {{name}}<hr>
+        {{age}}
+    </div>
+    <div id="other">
+        {{name}}
+    </div>
+
+    <script>
+        /*
+            shift + alt + A: 여러 줄 주석
+            ctrl + / : 한 줄 주석
+            ALT + 방향키: 줄 이동       
+        */
+        var vm = new Vue({ // VM. VUE 객체, VUE인스턴스 
+            el: '#app', // element: 구성관리요소, 생성된 뷰 객체가 관리하는 화면
+            data:{  // 뷰 객체가 가지고 있는 데이터
+                message: 'hello, vue!!!',
+                name: 'tommy',
+                age: 25
+            }
+        });
+    </script>
+</body>
+</html>

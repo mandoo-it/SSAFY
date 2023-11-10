@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		
+		<style type="text/css">
+			
+		</style>
+		
+		<script type="text/javascript" src="myscript.js"> </script> <!-- 외부스크립트 파일 -->
+		
+		<script type="text/javascript">
+			// script 내용: -> 내부 파일 형식
+			var name = "tommy";
+			var num = 123;
+			var flag = true;
+			name = 12345;
+			
+			document.write(name + "<br>"); // document.write(); -> browser에 출력하는 문장
+			document.write(num + "<br>");
+			document.write(flag + "<br>");
+			
+			document.write(count + "<br>");
+			document.write(address + "<br>");
+
+			
+			console.log(flag, num, name); // console.log(); -> browser 개발자모드 console창에 출력되는 문장
+									      // eclipse에서 오류 확인 안돼서 console 활용	
+			console.log(typeof(flag)); 
+			console.log(typeof(num)); 
+			console.log(typeof(name)); 
+			console.log(typeof(name2)); 
+		</script>
+	</head>
+	
+	<body>
+		<h1>hello</h1>
+		<script type="text/javascript"> // 본문에서 script 쓰는 경우 거의 x
+			alert('go!')
+		</script>
+		<p>welcome!</p>
+	</body>
+</html>
+

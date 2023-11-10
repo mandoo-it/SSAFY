@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- CDN으로 뷰 사용하기 -->
+    <!-- 1) vue lib loading -->
+    <script src="http://unpkg.com/vue"></script>
+    <script src="http://unpkg.com/vuex"></script>
+</head>
+<x/head>
+<body>
+<div id="app">
+	<p>{{ cnt }}</p>
+	<p>
+		<button @click="increase">+</button><button @click="decrease">-</button>
+	</p>
+</div>
+<script type="text/javascript">
+	const INCREMENT = 'increment'
+	const DECREMENT = 'decrement'
+	
+	const store = new Vuex.Store({
+		state: {cnt: 0},
+		mutations: {
+			[INCREMENT]: state => state.cnt++,
+			[DECREMENT]: state => state.cnt--
+		}
+	});
+		
+	new Vue({
+		el: '#app',
+		computed: {
+			cnt () {
+				return store.state.cnt
+			} 
+		},
+		methods: {
+			increase () {
+				store.commit(INCREMENT)
+			},
+			decrease () {
+				store.commit(DECREMENT)
+			}
+		}
+	});
+</script>
+</body>
+</html>

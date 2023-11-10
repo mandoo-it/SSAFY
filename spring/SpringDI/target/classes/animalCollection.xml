@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="tiger1" class="com.di.animal.Tiger">
+		<constructor-arg name="age" value="14" />
+		<property name="name" value="호랭이" />
+	</bean>
+	
+	<bean id="tiger2" class="com.di.animal.Tiger">
+		<constructor-arg name="age" value="30" />
+		<property name="name" value="호랭2" />
+	</bean>
+	
+	<bean id="lion1" class="com.di.animal.Lion">
+		<constructor-arg name="age" value="90" />
+		<property name="name" value="심바" />
+	</bean>
+	
+	<bean id="lion2" class="com.di.animal.Lion">
+		<constructor-arg name="age" value="80" />
+		<property name="name" value="무파사" />
+	</bean>
+	
+	<bean id="paris" class="com.di.animal.ParisZoo">
+		<property name="tigers">
+			<list>
+				<ref bean="tiger1"/>
+				<ref bean="tiger2"/>
+			</list>
+		</property>
+		<property name="lions">
+			<list>
+				<ref bean="lion1"/>
+				<ref bean="lion2"/>
+			</list>
+		</property>
+	</bean>
+	
+	
+
+</beans>

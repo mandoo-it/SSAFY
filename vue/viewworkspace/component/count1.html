@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://unpkg.com/vue"></script>
+</head>
+<body>
+    <div id="count">
+        <counter></counter>
+        <counter></counter>
+        <counter></counter>
+    </div>
+    <script type="text/x-template" id="counter">
+        <button @click="count+=1">{{"카운트 : "+count}}</button>
+    </script>
+    <script type="text/javascript">
+        let data={
+            count : 0
+        };
+
+        Vue.component('counter',{
+            template : '#counter',
+            data(){
+                return {
+                    count : 0
+                }
+            }
+        });
+
+        var first=new Vue({
+            el : '#count'
+        });
+    </script>
+</body>
+</html>

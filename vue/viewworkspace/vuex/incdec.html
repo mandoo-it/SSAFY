@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- CDN으로 뷰 사용하기 -->
+    <!-- 1) vue lib loading -->
+    <script src="http://unpkg.com/vue"></script>
+    <script src="http://unpkg.com/vuex"></script>
+</head>
+<x/head>
+<body>
+<div id="app">
+  <p>{{ count }}</p>
+  <p>
+    <button @click="increment">+</button>
+    <button @click="decrement">-</button>
+  </p>
+</div>
+
+<script>
+const store = new Vuex.Store({
+  state: {
+    count: 0
+  },
+  mutations: {
+  	increment: state => state.count++,
+    decrement: state => state.count--
+  }
+});
+
+new Vue({
+  el: '#app',
+  computed: {
+    count () {
+	    return store.state.count
+    }
+  },
+  methods: {
+    increment () {
+      store.commit('increment')
+    },
+    decrement () {
+    	store.commit('decrement')
+    }
+  }
+});
+</script>
+</body>
+</html>

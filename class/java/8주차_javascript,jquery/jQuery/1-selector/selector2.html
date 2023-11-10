@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+//jquery를 이용해서 사용자가 작성하는 스크립트부분
+//document(html)문서가 준비가 된 후 jquery를 실행하겠다는 의미
+$(document).ready(function() {
+	$(':text').val('~hello');
+	$(':password').css('border', 'solid 2px red');
+	$('[href]').css('text-decoration','none');
+	$(':button:last').css('background-color', 'yellow');
+	$(':button:eq(1)').css('background-color', 'green');
+	$(':button:first').css('background-color', 'blue');
+	$('ul li').css('color', 'magenta');
+});
+</script>
+</head>
+<body>
+	<input type="text"><br>
+	<input type="password"><br>
+	<input type="button" value="hello"><br>
+	<input type="button" value="hello"><br>
+	<input type="button" value="hello"><br>
+	<a href = "#">gogo</a>
+	
+	<hr>
+		<ul>
+			<li>coffee</li>
+			<li>tea</li>
+			<li>juice</li>
+		</ul>
+</body>
+</html>

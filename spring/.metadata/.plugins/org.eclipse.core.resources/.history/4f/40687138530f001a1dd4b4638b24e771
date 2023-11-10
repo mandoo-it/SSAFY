@@ -1,0 +1,17 @@
+package com.ssafy.fms.service;
+
+import java.util.List;
+
+import org.springframework.transaction.annotation.Transactional;
+
+import com.ssafy.fms.vo.Answer;
+import com.ssafy.fms.vo.QnA;
+
+//client(BoardApp.java)를 위한 인터페이스
+public interface AnswerService {
+	public List<Answer> selectAll();
+	public Answer selectOne(String num);
+	public void insert(Answer c);//번호 기준으로 제목과 내용 수정
+	public void delete(String num);
+	public void update(Answer b);
+}
